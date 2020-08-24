@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>Display a popup on click</title>
+    <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
+    <script src="https://api.mapbox.com/mapbox-gl-js/v1.8.1/mapbox-gl.js"></script>
+    <link href="https://api.mapbox.com/mapbox-gl-js/v1.8.1/mapbox-gl.css" rel="stylesheet" />
+    <link rel="stylesheet" href="tourist-attractions_UBC.css">
+</head>
+
+<body>
+    <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v4.0.2/mapbox-gl-directions.js">
+    </script>
+    <link rel="stylesheet"
+        href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v4.0.2/mapbox-gl-directions.css"
+        type="text/css" />
+    <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.4.2/mapbox-gl-geocoder.min.js">
+    </script>
+    <link rel="stylesheet"
+        href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.4.2/mapbox-gl-geocoder.css"
+        type="text/css" />
+    <script src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.auto.min.js"></script>
+    <div id="map"></div>
+    <br />
+    <button id="fly">Click here to begin your UBC journey!</button>
+    <div id="title" style="display:none;">
+        <h2>Low Cost Attractions at UBC</h2>
+    </div>
+    <div id="title2" style="display:none;">
+        <h3>Click on an icon!</h3>
+    </div>
+
+    <script>
+        mapboxgl.accessToken =
+            'pk.eyJ1IjoidXJ2ZWVrIiwiYSI6ImNrNmlnNnhoMzAwcG8za285ZGp6b3JjdTkifQ.y-r82uRmAE2MHOQ-2LuB4Q';
+        var start = [-106.3468, 56.1304];
+        var end = [-123.259, 49.268];
+        var places = {
+            "type": "FeatureCollection",
+            "features": [{
+                    "type": "Feature",
+                    "properties": {
+                        "title": "MOA",
+
+                        "description": "<strong>Museum of of Anthropology</strong><p><a href=\"https://moa.ubc.ca/\" target=\"_blank\" title=\"Opens in a new window\">Museum of of Anthropology</a> strives to promote awareness and understanding of culturally diverse ways of knowing the world through challenging and innovative programs and partnerships with Indigenous, local and global communities. Cost: Free for UBC students, General admission: $25 Open from 10:00am-5:00 p.m. everyday</p>",
+                        "icon": "museum"
+                    },
+                    "geometry": {
+                        "type": "Point",
+                        "coordinates": [
+                            -123.2589,
+                            49.2694
+                        ]
+                    }
+                },
+                {
+                    "type": "Feature",
+                    "properties": {
+                        "title": "Beaty Biodiversity Museum",
+
+                        "description": "<strong>Beaty Biodiversity Museum</strong><p><a href=\"https://beatymuseum.ubc.ca/\" target=\"_blank\" title=\"Opens in a new window\">Beaty Biodiversity Museum</a> is a natural history museum in Vancouver, British Columbia, Canada, located on the campus of the University of British Columbia. Cost: Free for UBC students, General admission: $14. Open: everyday from 10:00-5:00 p.m.</p>",
+                        "icon": "museum"
+                    },
+                    "geometry": {
+                        "type": "Point",
+                        "coordinates": [
+                            -123.251,
+                            49.2633
+                        ]
+                    }
+                },
+                {
+                    "type": "Feature",
+                    "properties": {
+                        "title": "Art Gallery",
+                        "description": "<strong>Morris and Helen Belkin Art Gallery</strong><p><a href=\"https://belkin.ubc.ca/\" target=\"_blank\" title=\"Opens in a new window\">The Morris and Helen Belkin Art Gallery</a> is a contemporary art gallery in Vancouver, British Columbia on the campus of the University of British Columbia. The gallery is housed in an award-winning building designed by architect Peter Cardew and opened in 1995. Cost: Free. Open: Monday to Friday from 10:00am-5:00 p.m. and from 12:00pm-5:00pm on weekends.</p>",
+                        "icon": "art-gallery"
+                    },
+                    "geometry": {
+                        "type": "Point",
+                        "coordinates": [
+                            -123.25623,
+                            49.26816
+                        ]
+                    }
+                },
+                {
+                    "type": "Feature",
+                    "properties": {
+                        "title": "Wreck Beach",
+                        "description": "<strong>Wreck beach</strong><p><a href=\"http://www.wreckbeach.org/https:\" target=\"_blank\" title=\"Opens in a new window\">The Morris and Helen Belkin Art Gallery</a> is an internationally-acclaimed 7.8 km long Nudist beach, located at UBC Vancouver, making it North America's largest naturist beach.Just 15 minutes from downtown Vancouver, Wreck Beach is easily accessible for visitors from over 150 countries, and generates over $60 million in tourist revenue annually.</p>",
+                        "icon": "beach"
+                    },
+                    "geometry": {
+                        "type": "Point",
+                        "coordinates": [
+                            -123.2615,
+                            49.2622
+                        ]
+                    }
+                },
+                {
+                    "type": "Feature",
+                    "properties": {
+                        "title": "Pacific Spirit Park",
+                        "description": "<strong>Pacific Spirit Park</strong><p><a href=\"http://www.metrovancouver.org/services/parks/parks-greenways-reserves/pacific-spirit-regional-park\" target=\"_blank\" title=\"Opens in a new window\">Pacific Spirit Park</a> is a hikers papradise located up against UBC.There’s over 54 kilometres (34 miles) of walking/hiking trails, with a mix of forested and shoreline trails. Not only does the park feature the clothing-optional Wreck Beach on the western edge, but 38 kilometres (24 miles) of the park’s trails are designated multi-use and available for cycling and horseback riding, making the park great for almost any outdoor activity.</p>",
+                        "icon": "park"
+                    },
+                    "geometry": {
+                        "type": "Point",
+                        "coordinates": [
+                            -123.2156,
+                            49.2533
+                        ]
+                    }
+                },
+                {
+                    "type": "Feature",
+                    "properties": {
+                        "title": "Nitobe Garden",
+                        "description": "<strong>Nitobe Memorial Garden</strong><p><a href=\"https://botanicalgarden.ubc.ca/visit/nitobe-memorial-garden/\" target=\"_blank\" title=\"Opens in a new window\">Nitobe Memorial Garden</a> is a 2½ acre traditional Japanese garden located at the University of British Columbia, just outside the city limits of Vancouver, British Columbia, Canada. It is part of the UBC Botanical Garden and Centre for Plant Research. It is free for students and $7 for the general public. It is open from 10am-3pm from Wednesday to Sunday</p>",
+                        "icon": "garden"
+                    },
+                    "geometry": {
+                        "type": "Point",
+                        "coordinates": [
+                            -123.2597,
+                            49.2664
+                        ]
+                    }
+                },
+                {
+                    "type": "Feature",
+                    "properties": {
+                        "title": "Pacific Museum of Earth",
+                        "description": "<strong>Pacific Museum of Earth</strong><p><a href=\"https://pme.ubc.ca/\" target=\"_blank\" title=\"Opens in a new window\">Pacific Museum of Earth</a> The Pacific Museum of Earth is home to a dazzling collection of minerals, rocks, and fossils gathered over our 90-year history. Our displays let visitors tour 4.5 billion years through the evolution of Earth, learn about natural disasters, discover the mineralogical guts of their smartphones, touch a dinosaur bone, and test their weather reporting skills in front of our green screen. Cost: Free. Open: Monday to Friday, from 10:00am-5:00pm.</p>",
+                        "icon": "museum"
+                    },
+                    "geometry": {
+                        "type": "Point",
+                        "coordinates": [
+                            -123.2514,
+                            49.2636
+                        ]
+                    }
+                },
+                {
+                    "type": "Feature",
+                    "properties": {
+                        "title": "Norm Theatre",
+                        "description": "<strong>Normand Bouchard Memorial Theatre</strong><p><a href=\"https://wiki.ubc.ca/Norm_Theatre\" target=\"_blank\" title=\"Opens in a new window\"><em>The Norm Theatre</em></a> is a movie theatre at UBC hosting independent programming & festivals. Cost: $5-$15. Open: depends</p>",
+                        "icon": "theatre"
+                    },
+                    "geometry": {
+                        "type": "Point",
+                        "coordinates": [
+                            -123.250466,
+                            49.268324
+                        ]
+                    }
+                },
+                {
+                    "type": "Feature",
+                    "properties": {
+                        "title": "Thunderbird Sports Arena",
+                        "description": "<strong>Doug Mitchell Thunderbird Sports Centre</strong><p><a href=\"https://thunderbirdarena.ubc.ca/\" target=\"_blank\">The Thunderbird Sports Arena</a> is a LEED Silver certified indoor arena in Greater Vancouver, on the campus of the University of British Columbia. Cost: $3-$20 depending on the activity. Open: 9:00am-5:00pm..</p>",
+                        "icon": "stadium"
+                    },
+                    "geometry": {
+                        "type": "Point",
+                        "coordinates": [
+                            -123.2414,
+                            49.2606
+                        ]
+                    }
+                },
+            ]
+        };
+
+
+        var map = new mapboxgl.Map({
+            container: 'map',
+            style: 'mapbox://styles/mapbox/streets-v11',
+            center: [-106.3468, 56.1304],
+            zoom: 4
+        });
+
+        map.addControl(
+            new MapboxDirections({
+                accessToken: mapboxgl.accessToken
+            }),
+            'top-left'
+        );
+
+
+        var titleElement = document.getElementById('title');
+        var title2Element = document.getElementById('title2');
+
+        var isAtStart = true;
+        var flyElement = document.getElementById('fly');
+
+        flyElement.addEventListener('click', function () {
+
+            // depending on whether we're currently at point a or b, aim for
+            // point a or b
+            var target = isAtStart ? end : start;
+
+            // and now we're at the opposite point
+            isAtStart = !isAtStart;
+
+            map.flyTo({
+                // These options control the ending camera position: centered at
+                // the target, at zoom level 9, and north up.
+                center: target,
+                zoom: 13,
+                bearing: 0,
+
+                // These options control the flight curve, making it move
+                // slowly and zoom out almost completely before starting
+                // to pan.
+                speed: 1.3, // flying speed
+                curve: 1, // change the speed at which it zooms out
+
+                // This can be any easing function: it takes a number between
+                // 0 and 1 and returns another number between 0 and 1.
+                easing: function (t) {
+                    return t;
+                },
+
+                // this animation is considered essential with respect to prefers-reduced-motion
+                essential: true
+
+
+            });
+            flyElement.style.visibility = 'hidden';
+            titleElement.style.display = 'inline';
+            title2Element.style.display = 'inline';
+
+        });
+
+
+        map.on('load', function () {
+
+            map.addSource('places', {
+                'type': 'geojson',
+                'data': places
+            });
+
+            map.addLayer({
+                'id': 'places',
+                'type': 'symbol',
+                'source': 'places',
+                'layout': {
+                    'text-field': ['get', 'title'],
+                    'text-variable-anchor': ['top', 'bottom', 'left', 'right'],
+                    'text-radial-offset': 0.5,
+                    'text-justify': 'auto',
+                    'icon-image': '{icon}-15',
+                    'icon-allow-overlap': true
+                }
+            });
+        });
+
+        map.on('click', 'places', function (e) {
+            var coordinates = e.features[0].geometry.coordinates.slice();
+            var description = e.features[0].properties.description;
+
+            while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+                coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+            }
+
+            new mapboxgl.Popup()
+                .setLngLat(coordinates)
+                .setHTML(description)
+                .addTo(map);
+        });
+
+        // Change the cursor to a pointer when the mouse is over the places layer.
+        map.on('mouseenter', 'places', function () {
+            map.getCanvas().style.cursor = 'pointer';
+        });
+
+        // Change it back to a pointer when it leaves.
+        map.on('mouseleave', 'places', function () {
+            map.getCanvas().style.cursor = '';
+        });
+
+
+        map.addControl(
+            new MapboxGeocoder({
+                accessToken: mapboxgl.accessToken,
+                mapboxgl: mapboxgl
+            })
+        );
+    </script>
+
+</body>
+
+</html>

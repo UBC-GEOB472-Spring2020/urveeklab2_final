@@ -1,0 +1,67 @@
+    body {
+      margin: 0;
+      padding: 0;
+    }
+
+    #map {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 100%;
+    }
+
+    #title {
+      margin: 10px;
+      font-size: 1.6em;
+      font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+      color: #000000;
+      position: absolute;
+      top: 140px;
+      /* visibility:'hidden'; */
+    }
+
+    
+    #title2 {
+      margin: 10px;
+      font-size: 1.7em;
+      font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+      color: rgb(71, 29, 90);
+      position: absolute;
+      top: 100px;
+      left: 0;
+      right: 5;
+      /* visibility:'hidden'; */
+    }
+
+    #fly {
+      display: block;
+      position: absolute;
+      top: 340px;
+      right: 440px;
+      margin: 0px auto;
+      width: 30%;
+      height: 70px;
+      padding: 10px;
+      border: true;
+      border-style: solid;
+      border-color: rgb(48, 47, 47);
+      border-radius: 3px;
+      font-size: 20px;
+      font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+      font-weight: bold;
+      text-align: center;
+      color: #000000;
+      background: #fec44f;
+    }
+
+    #MapboxDirections { 
+      top: 340px;
+
+    }
+     
+
+
+    .mapboxgl-popup {
+      max-width: 400px;
+      font: 12px/20px 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    }
